@@ -1,0 +1,333 @@
+@import 'color';
+@mixin border($color: #000) {
+  border: {
+    width: 0.15rem;
+    color: $color;
+    style: solid;
+  };
+}
+@mixin box-shadow() {
+  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+}
+
+::-webkit-input-placeholder {
+  color: $color-text-dark;
+}
+
+:-ms-input-placeholder {
+  color: $color-text-dark;
+}
+
+::placeholder {
+  color: $color-text-dark;
+}
+
+::-moz-selection {
+  color: $color-text-select;
+  background: $color-background-select;
+}
+
+::selection {
+  color: $color-text-select;
+  background: $color-background-select;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: $color-background-light;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $color-border-medium;
+
+  &:hover {
+    cursor: -webkit-grab;
+    cursor: grab;
+  }
+
+  &:active {
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+  }
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background-color: transparent;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  /* font-size: 62.5%;*/
+  padding: 0;
+  color: color-contrast($color-background-dark);
+  background-color: $color-background-light;
+
+  #sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: $color-background-dark;
+
+    #brand {
+      cursor: default;
+
+      img {
+        display: block;
+        width: 40px;
+        margin: 10px auto 0;
+      }
+    }
+
+    ul {
+      &.nav > li {
+        margin-top: 10px;
+
+        a {
+          border-radius: 0;
+          margin: 0;
+          text-transform: capitalize;
+          font-size: 16px;
+          font-weight: 400;
+          @media (min-width: 992px) {
+            text-align: left;
+          }
+
+          i {
+            color: $color-text-medium;
+            font-size: 20px;
+            padding: 0 6% 0 5%;
+          }
+
+          font {
+            padding: 0 2%;
+          }
+        }
+
+        .badge {
+          text-transform: uppercase;
+          color: $color-text-bright;
+          background-color: $color-background-bright;
+        }
+      }
+
+      &.nav-pills > li.active > a,
+      .nav-pills > li.active > a:focus,
+      .nav-pills > li.active > a:hover {
+        color: $color-text-medium;
+        background-color: $color-background;
+
+        .badge {
+          text-transform: uppercase;
+          color: $color-text-bright;
+          background-color: $color-background-bright;
+        }
+
+        .label {
+          text-transform: uppercase;
+        }
+      }
+
+      &.nav-stacked > li+li {
+        margin-top: 0;
+      }
+    }
+  }
+
+  #viewport {
+    overflow-x: hidden;
+
+    header {
+      background-color: $color-background-medium;
+      border-bottom: 1px solid $color-border-medium;
+
+      .breadcrumb {
+        margin-bottom: 0;
+        border-radius: 0;
+        background-color: inherit;
+      }
+
+      a,
+      a:focus,
+      a:hover {
+        color: $color-text-bright;
+      }
+    }
+
+    #cpanel {
+      background-color: $color-background-light;
+      padding: 10px 15px;
+    }
+  }
+}
+/* Override Bootstrap */
+.btn:not(.btn-raised),
+.btn:not(.btn-raised).btn-default,
+.input-group-btn .btn:not(.btn-raised),
+.input-group-btn .btn:not(.btn-raised).btn-default {
+  color: $color-text-medium;
+}
+
+.form-group {
+  .form-control {
+    &:focus {
+      color: $color-text-light;
+    }
+    color: $color-text-medium;
+    background-image: linear-gradient($color-text-bright, $color-text-bright), linear-gradient($color-text-medium, $color-text-medium) !important;
+  }
+  select {
+    background-color: $color-text-medium;
+    option {
+      background-color: $color-background-light;
+    }
+  }
+
+  &.is-focused {
+    label {
+      color: $color-text-light;
+      &.control-label {
+        color: $color-text-light;
+      }
+    }
+  }
+
+  input[type="password"],
+  input[type="password"]:focus,
+  input[type="text"],
+  input[type="text"]:focus {
+    background-image: linear-gradient($color-text-bright, $color-text-bright), linear-gradient($color-text-medium, $color-text-medium) !important;
+  }
+}
+
+.label,
+.label.label-default {
+  background-color: $color-border-dark;
+  color: $color-white;
+  cursor: default;
+}
+
+#toast-container>div {
+  box-shadow: none;
+}
+
+legend {
+  color: inherit;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: $color-background-medium;
+}
+
+.checkbox input[type=checkbox]:checked+.checkbox-material .check,
+label.checkbox-inline input[type=checkbox]:checked+.checkbox-material .check {
+  background-color: $color-border-medium;
+  border-color: $color-text-bright;
+  opacity: 1;
+
+  &:before {
+    color: $color-text-bright;
+  }
+}
+
+.checkbox .checkbox-material .check,
+label.checkbox-inline .checkbox-material .check {
+  border-color: $color-grey;
+}
+
+.btn-group-vertical.open > .dropdown-toggle.btn,
+.btn-group-vertical.open > .dropdown-toggle.btn.btn-default,
+.btn-group.open > .dropdown-toggle.btn,
+.btn-group.open > .dropdown-toggle.btn.btn-default {
+  background-color: inherit;
+  box-shadow: none;
+}
+
+.dropdown-menu {
+  background-color: $color-border-medium;
+}
+
+.dropdown-menu > li > a {
+  color: $color-text-medium;
+}
+
+.dropdown-menu li a:hover {
+  color: $color-dark-green;
+  cursor: pointer;
+}
+
+.modal-content {
+  background-color: $color-border-light;
+
+  .modal-header {
+    .close {
+      text-shadow: none;
+      color: $color-text-light;
+    }
+  }
+
+  .modal-body {
+    .form-group {
+      label {
+        color: $color-text-medium;
+      }
+    }
+  }
+
+  .modal-footer {
+    .btn {
+      color: $color-text-medium;
+      outline: none;
+    }
+
+    .btn-success {
+      color: $color-dark-green;
+    }
+
+    .btn-warning {
+      color: $color-red;
+    }
+  }
+
+  span {
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  pre {
+    color: $color-text-bright;
+    background-color: $color-border-medium;
+    border-radius: 0;
+    border: none;
+  }
+}
+
+.table-responsive {
+  border-color: $color-border-medium;
+}
+
+.label.label-success {
+  background-color: $color-dark-green;
+  color: #FFFFFF;
+}
+
+.label.label-danger {
+  color: #FFFFFF;
+}
+
+.label,
+.label.label-default {
+  color: $color-text-medium;
+}
+
+a, a:focus, a:hover {
+  color: $color-text-bright;
+}

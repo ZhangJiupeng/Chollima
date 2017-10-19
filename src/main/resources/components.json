@@ -1,0 +1,259 @@
+[
+  {
+    "name": "cc.gospy.chollima.entity.component.impl.HttpFetchComponent",
+    "form": {
+      "data": {},
+      "schema": {
+        "title": "Http Fetcher",
+        "type": "object",
+        "properties": {
+          "userAgent": {
+            "title": "User Agent",
+            "type": "Select",
+            "enum": [
+              "Gospy-HttpFetcher/3.10",
+              "Baiduspider ( http://www.baidu.com/search/spider.htm)",
+              "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)",
+              "Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)",
+              "facebookscraper/1.0( http://www.facebook.com/sharescraper_help.php)",
+              "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36",
+              "Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0",
+              "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36 OPR/20.0.1387.91",
+              "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/418.8 (KHTML, like Gecko) Safari/419.3",
+              "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:14.0) Gecko/20100101 Firefox/14.0.1",
+              "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36",
+              "Mozilla/5.0 (X11; FreeBSD amd64) AppleWebKit/537.4 (KHTML like Gecko) Chrome/22.0.1229.79 Safari/537.4",
+              "Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML like Gecko) Version/7.0 Mobile/11D257 Safari/9537.53",
+              "Mozilla/5.0 (Linux; Android 4.4.4; Nexus 7 build/KTU84P) AppleWebKit/537.36 (KHTML like Gecko) Chrome/36.0.1985.135 Safari/537.36",
+              "Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0)"
+            ],
+            "removeDefaultNone": true,
+            "hideNone": true,
+            "sort": false,
+            "emptySelectFirst": true
+          },
+          "timeout": {
+            "title": "Timeout",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "maxConnCount": {
+            "title": "Max Connection Count",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "maxConnPerRoute": {
+            "title": "Max Connection per Route",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "cleanPeriodInSeconds": {
+            "title": "Connection Check Period(s)",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483
+          },
+          "connExpireInSeconds": {
+            "title": "Connection Expire Time(s)",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483
+          },
+          "autoKeepAlive": {
+            "title": "Connection Auto Keepalive",
+            "type": "boolean"
+          },
+          "redirectsEnabled": {
+            "title": "Redirects Enabled",
+            "type": "boolean"
+          },
+          "httpProxy": {
+            "title": "Proxies",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cookies": {
+            "title": "Cookie String",
+            "type": "string"
+          }
+        }
+      },
+      "options": {
+        "fields": {
+          "userAgent": {
+            "type": "select",
+            "removeDefaultNone": true,
+            "sort": false
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "cc.gospy.chollima.entity.component.impl.PhantomFetchComponent",
+    "form": {
+      "data": {},
+      "schema": {
+        "title": "PhantomJS Fetcher",
+        "type": "object",
+        "properties": {
+          "userAgent": {
+            "title": "User Agent",
+            "type": "Select",
+            "enum": [
+              "Gospy-HttpFetcher/3.10",
+              "Baiduspider ( http://www.baidu.com/search/spider.htm)",
+              "Mozilla/5.0 (compatible; Googlebot/2.1;  http://www.google.com/bot.html)",
+              "Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)",
+              "facebookscraper/1.0( http://www.facebook.com/sharescraper_help.php)",
+              "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36",
+              "Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0",
+              "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36 OPR/20.0.1387.91",
+              "Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en) AppleWebKit/418.8 (KHTML, like Gecko) Safari/419.3",
+              "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:14.0) Gecko/20100101 Firefox/14.0.1",
+              "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36",
+              "Mozilla/5.0 (X11; FreeBSD amd64) AppleWebKit/537.4 (KHTML like Gecko) Chrome/22.0.1229.79 Safari/537.4",
+              "Mozilla/5.0 (iPhone; CPU iPhone OS 7_1_2 like Mac OS X) AppleWebKit/537.51.2 (KHTML like Gecko) Version/7.0 Mobile/11D257 Safari/9537.53",
+              "Mozilla/5.0 (Linux; Android 4.4.4; Nexus 7 build/KTU84P) AppleWebKit/537.36 (KHTML like Gecko) Chrome/36.0.1985.135 Safari/537.36",
+              "Mozilla/5.0 (compatible; MSIE 9.0; Windows Phone OS 7.5; Trident/5.0; IEMobile/9.0)"
+            ],
+            "removeDefaultNone": true,
+            "hideNone": true,
+            "sort": false,
+            "emptySelectFirst": true
+          },
+          "basePath": {
+            "title": "Path to phantomjs.exe",
+            "type": "string"
+          },
+          "timeout": {
+            "title": "Timeout",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "loadImage": {
+            "title": "Load Image",
+            "type": "boolean"
+          },
+          "cookies": {
+            "title": "Cookie String",
+            "type": "string"
+          }
+        }
+      },
+      "options": {
+        "fields": {
+          "userAgent": {
+            "type": "select",
+            "removeDefaultNone": true,
+            "sort": false
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "cc.gospy.chollima.entity.component.impl.FileFetchComponent",
+    "form": {
+      "data": {},
+      "schema": {
+        "title": "File Fetcher",
+        "type": "object"
+      }
+    }
+  },
+  {
+    "name": "cc.gospy.chollima.entity.component.impl.UniversalProcessComponent",
+    "form": {
+      "data": {},
+      "schema": {
+        "title": "Universal Processor",
+        "type": "object"
+      }
+    }
+  },
+  {
+    "name": "cc.gospy.chollima.entity.component.impl.XPathProcessComponent",
+    "form": {
+      "data": {},
+      "schema": {
+        "title": "Xpath Processor",
+        "type": "object"
+      }
+    }
+  },
+  {
+    "name": "cc.gospy.chollima.entity.component.impl.FullLinkProcessComponent",
+    "form": {
+      "data": {},
+      "schema": {
+        "title": "Full Link Processor",
+        "type": "object"
+      }
+    }
+  },
+  {
+    "name": "cc.gospy.chollima.entity.component.impl.WebCapturerProcessComponent",
+    "form": {
+      "data": {},
+      "schema": {
+        "title": "Web Capturer",
+        "type": "object"
+      }
+    }
+  },
+  {
+    "name": "cc.gospy.chollima.entity.component.impl.HierarchicalFilePipeComponent",
+    "form": {
+      "data": {},
+      "schema": {
+        "title": "Hierarchical File Pipeline",
+        "type": "object",
+        "properties": {
+          "basePath": {
+            "title": "Download Path",
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "cc.gospy.chollima.entity.component.impl.SimpleFilePipeComponent",
+    "form": {
+      "data": {},
+      "schema": {
+        "title": "Simple File Pipeline",
+        "type": "object",
+        "properties": {
+          "basePath": {
+            "title": "Download Path",
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "cc.gospy.chollima.entity.component.impl.ExcelPipeComponent",
+    "form": {
+      "data": {},
+      "schema": {
+        "title": "XLS Pipeline",
+        "type": "object",
+        "properties": {
+          "path": {
+            "title": "XLS File Path",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+]

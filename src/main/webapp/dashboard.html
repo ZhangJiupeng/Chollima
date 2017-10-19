@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Dashboard - Chollima</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Bootstrap Material Design -->
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/ext/font-roboto.css">
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/ext/font-material-icons.css">
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/0.5.10/dist/css/bootstrap-material-design.min.css">
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/0.5.10/dist/css/ripples.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" type="text/css" href="./ext/toastr/build/toastr.min.css">
+  <!-- Chollima -->
+  <link rel="stylesheet" type="text/css" href="./stylesheets/frame.css">
+  <link rel="stylesheet" type="text/css" href="./stylesheets/dashboard.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div id="sidebar" class="col-xs-12 hidden-xs col-sm-1 col-md-2">
+        <span id="brand">
+            <h1 class="text-capitalize text-center hidden-xs hidden-sm">chollima</h1>
+            <img src="./img/gospy-logo-flat.svg" alt="logo" class="visible-xs visible-sm">
+        </span>
+        <ul class="nav nav-pills nav-stacked">
+          <li class="active" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Dashboard">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE6DF;</i>
+              <font class="hidden-sm">dashboard</font>
+              <span class="badge hidden-xs hidden-sm">1</span>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Workshop">
+            <a href="./workshop.html" class="btn">
+              <i class="material-icons">&#xE30D;</i>
+              <font class="hidden-sm">workshop</font>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Task Center">
+            <a href="./task-center.html" class="btn">
+              <i class="material-icons">&#xE163;</i>
+              <font class="hidden-sm">task center</font>
+            </a>
+          </li>
+          <!-- <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Repository">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE1DB;</i>
+              <font class="hidden-sm">repository</font>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Extensions">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE87B;</i>
+              <font class="hidden-sm">extensions</font>
+              <span class="badge hidden-xs hidden-sm">0</span>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Settings">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE8B8;</i>
+              <font class="hidden-sm">settings</font>
+            </a>
+          </li> -->
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Logout">
+            <a href="./logout.html" class="btn">
+              <i class="material-icons">&#xE879;</i>
+              <font class="hidden-sm">logout</font>
+            </a>
+          </li>
+      </div>
+      <div id="viewport" class="col-sm-11 col-sm-offset-1 col-md-10 col-md-offset-2">
+        <div class="row">
+          <header class="col-md-12">
+            <ol class="breadcrumb">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Dashboard</a></li>
+              <li class="active">Status</li>
+            </ol>
+          </header>
+          <div id="cpanel" class="col-md-12">
+            <div id="mask" style="display:none"><i class="material-icons">add_to_queue</i>
+              No running spider, launch a task, then come back!</div>
+
+            <div class="row">
+              <div id="monitor"></div>
+            </div>
+
+            <div id="bar-status" class="row">
+              <div class="table-responsive">
+                <table id="table-status" class="table table-striped">
+                  <tr>
+                    <th>Run Time</th>
+                    <th>Current Task in Queue</th>
+                    <th>Current LazyTask in Queue</th>
+                    <th>Remover Size</th>
+                    <th>Status</th>
+                  </tr>
+                  <tr>
+                    <td id="runningTime">0<span>ms</span></td>
+                    <td id="currentTaskQueueSize">0<span>task</span></td>
+                    <td id="currentLazyTaskQueueSize">0<span>task</span></td>
+                    <td id="recodedTaskSize">0<span>task</span></td>
+                    <td>
+                      <div id="lamp-status" class="animate-blink"></div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Scripts -->
+  <script src="./ext/jquery/dist/jquery.min.js" charset="utf-8"></script>
+  <script src="./ext/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="./ext/bootstrap-material-design/0.5.10/dist/js/material.min.js" charset="utf-8"></script>
+  <script src="./ext/bootstrap-material-design/0.5.10/dist/js/ripples.js" charset="utf-8"></script>
+  <script src="./ext/toastr/build/toastr.min.js" charset="utf-8"></script>
+  <script src="./ext/echarts/echarts.common.min.js" charset="utf-8"></script>
+  <script src="./ext/echarts/theme/dark.js" charset="utf-8"></script>
+  <script src="./js/constant.js" charset="utf-8"></script>
+  <script>
+    $.material.init();
+    $.material.ripples();
+    $.material.input();
+    $.material.checkbox();
+    $.material.radio();
+    $(document).bind("contextmenu", function(e) {
+      return false;
+    });
+    $('[data-toggle="popover"]').popover({
+      delay: {
+        "show": 500,
+        "hide": 100
+      }
+    }).on("show.bs.popover", function() {
+      return $("#sidebar > ul > li > a > font").is(":hidden");
+    });
+    toastr.options = {
+      "progressBar": true
+    };
+  </script>
+  <script>
+    var myChart = echarts.init(document.getElementById('monitor'), 'dark');
+
+    var now = Date.parse(new Date());
+    var oneSec = 1000;
+    var value;
+    var taskInputCount = [];
+    var taskOutputCount = [];
+
+    // init
+    for (var i = 0; i < 60; i++) {
+      taskInputCount.push({
+        name: now.toString(),
+        value: [now - ((60 - i) * oneSec), 0]
+      });
+      taskOutputCount.push({
+        name: now.toString(),
+        value: [now - ((60 - i) * oneSec), 0]
+      });
+    }
+
+
+    function ajax(options) {
+      options = options || {};
+      options.type = (options.type || "GET").toUpperCase();
+      options.dataType = options.dataType || "json";
+      var params = formatParams(options.data);
+
+      var xhr;
+      if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+      } else {
+        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+      }
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+          var status = xhr.status;
+          if (status >= 200 && status < 300) {
+            options.success && options.success(xhr.responseText, xhr.responseXML);
+          } else {
+            options.fail && options.fail(status);
+          }
+        }
+      };
+
+      if (options.type == "GET") {
+        xhr.open("GET", options.url + "?" + params, true);
+        xhr.send(null);
+      } else if (options.type == "POST") {
+        xhr.open("POST", options.url, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(params);
+      }
+    }
+
+    option = {
+      title: {
+        text: 'Task Throughput Diagram',
+        left: '3.5%'
+      },
+      tooltip: {
+        trigger: 'axis',
+        formatter: function(params) {
+          switch (params.length) {
+            case 1:
+              return params[0].seriesName + ": " + params[0].value[1];
+            case 2:
+              return params[0].seriesName + ": " + params[0].value[1] + "<br/>" +
+                params[1].seriesName + ": " + params[1].value[1];
+            default:
+              return null;
+          }
+        },
+        padding: [5, 10],
+        axisPointer: {
+          animation: false,
+          // type: 'cross',
+          // label: {
+          //   backgroundColor: '#000'
+          // }
+        }
+      },
+      xAxis: {
+        type: 'time',
+        splitNumber: 6,
+        splitLine: {
+          show: true
+        }
+      },
+      yAxis: {
+        type: 'value',
+        /*scale: 'true',*/
+        boundaryGap: [0, '100%'],
+        splitNumber: 8,
+        splitLine: {
+          show: true
+        }
+      },
+      dataZoom: [{
+        id: 'dataZoomX',
+        type: 'slider',
+        xAxisIndex: [0],
+        filterMode: 'filter',
+        start: 60,
+        end: 100
+      }],
+      grid: {
+        show: true,
+        top: '10%',
+        left: '4%',
+        right: '4%',
+        // containLabel: true
+      },
+      textStyle: {
+        fontFamily: 'inherit',
+        fontWeight: 'lighter'
+      },
+      backgroundColor: 'inherit',
+      animationDuration: 0,
+      legend: {
+        data: ['Task Input', 'Task Output'],
+        selected: {
+          'Task Input': false,
+          'Task Output': true
+        },
+        right: '3%'
+      },
+      color: ['#e2914f', '#bd76ae'],
+      series: [{
+          name: 'Task Input',
+          type: 'line',
+          showSymbol: false,
+          hoverAnimation: false,
+          areaStyle: {
+            normal: {}
+          },
+          data: taskInputCount
+        },
+        {
+          name: 'Task Output',
+          type: 'line',
+          showSymbol: false,
+          hoverAnimation: false,
+          areaStyle: {
+            normal: {}
+          },
+          data: taskOutputCount
+        }
+      ]
+    };
+
+    function update() {
+      updateData();
+      myChart.setOption({
+        series: [{
+            data: taskInputCount
+          },
+          {
+            data: taskOutputCount
+          }
+        ]
+      });
+    }
+
+    setTimeout(update, 1000);
+
+    function updateData() {
+      var groupId = window.location.hash;
+      if (!groupId) {
+        // toastr["error"]("No Spider Specified.");
+        $("#mask").show().siblings().hide();//TODO
+        $(".badge").html(0);
+        $("#lamp-status").css("background-color", "#de5640");
+        $("#lamp-status").removeClass('animate-blink');
+        clearTimeout(update);
+        return false;
+      }
+      $.ajax({
+        url: API_DASHBOARD_STATUS_BASE + groupId.substring(1),
+        type: "get",
+        dataType: "json",
+        async: false,
+        success: function(result) {
+          now = Date.parse(new Date());
+          if (result.status == "success") {
+            var data = result.data;
+            if (taskInputCount.length >= 600) {
+              taskInputCount.shift();
+            }
+            taskInputCount.push({
+              name: now.toString(),
+              value: [now, data.taskInputCount]
+            });
+            if (taskOutputCount.length >= 600) {
+              taskOutputCount.shift();
+            }
+            taskOutputCount.push({
+              name: now.toString(),
+              value: [now, data.taskOutputCount]
+            });
+            $("#runningTime").html(data.runningTimeMillis + "<span>ms</span>");
+            $("#currentTaskQueueSize").html(data.currentTaskQueueSize + "<span>task</span>");
+            $("#currentLazyTaskQueueSize").html(data.currentLazyTaskQueueSize + "<span>task</span>");
+            $("#recodedTaskSize").html(data.recodedTaskSize + "<span>tasks</span>");
+            setTimeout(update, 1000);
+          } else {
+            toastr["warning"](result.data);
+            if (result.data.indexOf('stop') > 0) {
+              $("#lamp-status").css("background-color", "#717784");
+              $("#lamp-status").removeClass('animate-blink');
+              $(".badge").html(0);
+            } else {
+              $("#lamp-status").css("background-color", "#de5640");
+              $("#lamp-status").removeClass('animate-blink');
+            }
+            return false;
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+          clearTimeout(update);
+          return false;
+        }
+      });
+    }
+
+    myChart.setOption(option);
+    window.onresize = myChart.resize;
+  </script>
+</body>
+
+</html>

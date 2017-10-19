@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Bootstrap Material Design -->
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/ext/font-roboto.css">
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/ext/font-material-icons.css">
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/0.5.10/dist/css/bootstrap-material-design.min.css">
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/0.5.10/dist/css/ripples.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" type="text/css" href="./ext/toastr/build/toastr.min.css">
+  <!-- Chollima -->
+  <link rel="stylesheet" type="text/css" href="./stylesheets/index.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div id="sidebar" class="col-xs-12 hidden-xs col-sm-1 col-md-2">
+        <span id="brand">
+            <h1 class="text-capitalize text-center hidden-xs hidden-sm">chollima</h1>
+            <img src="./img/gospy-logo-flat.svg" alt="logo" class="visible-xs visible-sm">
+        </span>
+        <ul class="nav nav-pills nav-stacked">
+          <li class="active" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Dashboard">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE6DF;</i>
+              <font class="hidden-sm">dashboard</font>
+              <span class="badge hidden-xs hidden-sm">1</span>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Workshop">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE30D;</i>
+              <font class="hidden-sm">workshop</font>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Task Center">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE163;</i>
+              <font class="hidden-sm">task center</font>
+            </a>
+          </li>
+          <!-- <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Repository">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE1DB;</i>
+              <font class="hidden-sm">repository</font>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Extensions">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE87B;</i>
+              <font class="hidden-sm">extensions</font>
+              <span class="badge hidden-xs hidden-sm">0</span>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Settings">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE8B8;</i>
+              <font class="hidden-sm">settings</font>
+            </a>
+          </li> -->
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Logout">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE879;</i>
+              <font class="hidden-sm">logout</font>
+            </a>
+          </li>
+      </div>
+      <div id="viewport" class="col-sm-11 col-sm-offset-1 col-md-10 col-md-offset-2">
+        <div class="row">
+          <header class="col-md-12">
+            <ol class="breadcrumb">
+              <li><a href="#">Home</a></li>
+            </ol>
+          </header>
+          <div id="cpanel" class="col-md-12">
+            loading...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Scripts -->
+  <script src="./ext/jquery/dist/jquery.min.js" charset="utf-8"></script>
+  <script src="./ext/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="./ext/bootstrap-material-design/0.5.10/dist/js/material.min.js" charset="utf-8"></script>
+  <script src="./ext/bootstrap-material-design/0.5.10/dist/js/ripples.js" charset="utf-8"></script>
+  <script src="./ext/toastr/build/toastr.min.js" charset="utf-8"></script>
+  <script src="./js/constant.js" charset="utf-8"></script>
+  <script>
+    // TODO
+    location.href="./dashboard.html";
+  </script>
+  <script>
+    $.material.init();
+    $.material.ripples();
+    $.material.input();
+    $.material.checkbox();
+    $.material.radio();
+    $(document).bind("contextmenu", function(e) {
+      return false;
+    });
+    $('[data-toggle="popover"]').popover({
+      delay: {
+        "show": 500,
+        "hide": 100
+      }
+    }).on("show.bs.popover", function() {
+      return $("#sidebar > ul > li > a > font").is(":hidden");
+    });
+    toastr.options = {
+      "progressBar": true
+    };
+  </script>
+</body>
+
+</html>

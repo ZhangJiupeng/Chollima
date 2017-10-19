@@ -1,0 +1,183 @@
+/* Dark Theme */
+/* Light Theme */
+/*$color-background: #c9c9c9;
+$color-background-selectById: #212121;
+$color-background-bright: #fafafa;
+$color-background-dark: #e0e0e0;
+$color-background-medium: #f5f5f5;
+$color-background-light: #fafafa;
+$color-text-bright: #009688;
+$color-text-selectById: #ffffff;
+$color-text-dark: #212121;
+$color-text-medium: #303030;
+$color-text-light: #424242;
+$color-border-dark: #cccccc;
+$color-border-medium: #e0e0e0;
+$color-light-blue: #2196f3;
+$color-blue: #2979ff;
+$color-dark-blue: #1565c0;
+$color-purple: #aa759f;
+$color-yellow: #fdd835;
+$color-orange: #fb8c00;
+$color-pink: #ec407a;
+$color-red: #e53935;
+$color-green: #aeea00;
+$color-white: #ffffff;
+$color-brown: #6d4c41;
+$color-cyan: #00bcd4;*/
+::-webkit-input-placeholder {
+  color: #5b6270;
+}
+
+:-ms-input-placeholder {
+  color: #5b6270;
+}
+
+::placeholder {
+  color: #5b6270;
+}
+
+::-moz-selection {
+  color: #000000;
+  background: rgba(255, 205, 16, 0.99);
+}
+
+::selection {
+  color: #000000;
+  background: rgba(255, 205, 16, 0.99);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #30353f;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3d444e;
+}
+::-webkit-scrollbar-thumb:hover {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+::-webkit-scrollbar-thumb:active {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background-color: transparent;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  /* font-size: 62.5%;*/
+  padding: 0;
+  color: #c8d5ef;
+  background-color: #30353f;
+}
+body #sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #20242a;
+}
+body #sidebar #brand {
+  cursor: default;
+}
+body #sidebar #brand img {
+  display: block;
+  width: 40px;
+  margin: 10px auto 0;
+}
+body #sidebar ul.nav > li {
+  margin-top: 10px;
+}
+body #sidebar ul.nav > li a {
+  border-radius: 0;
+  margin: 0;
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 400;
+}
+@media (min-width: 992px) {
+  body #sidebar ul.nav > li a {
+    text-align: left;
+  }
+}
+body #sidebar ul.nav > li a i {
+  color: #9ba3b4;
+  font-size: 20px;
+  padding: 0 6% 0 5%;
+}
+body #sidebar ul.nav > li a font {
+  padding: 0 2%;
+}
+body #sidebar ul.nav > li .badge {
+  text-transform: uppercase;
+  color: #ffcd10;
+  background-color: #30353f;
+}
+body #sidebar ul.nav-pills > li.active > a,
+body #sidebar ul .nav-pills > li.active > a:focus,
+body #sidebar ul .nav-pills > li.active > a:hover {
+  color: #9ba3b4;
+  background-color: #272b33;
+}
+body #sidebar ul.nav-pills > li.active > a .badge,
+body #sidebar ul .nav-pills > li.active > a:focus .badge,
+body #sidebar ul .nav-pills > li.active > a:hover .badge {
+  text-transform: uppercase;
+  color: #ffcd10;
+  background-color: #30353f;
+}
+body #sidebar ul.nav-pills > li.active > a .label,
+body #sidebar ul .nav-pills > li.active > a:focus .label,
+body #sidebar ul .nav-pills > li.active > a:hover .label {
+  text-transform: uppercase;
+}
+body #sidebar ul.nav-stacked > li + li {
+  margin-top: 0;
+}
+body #viewport header {
+  background-color: #272b33;
+  border-bottom: 1px solid #3d444e;
+}
+body #viewport header .breadcrumb {
+  margin-bottom: 0;
+  border-radius: 0;
+  background-color: inherit;
+}
+body #viewport header a,
+body #viewport header a:focus,
+body #viewport header a:hover {
+  color: #ffcd10;
+}
+body #viewport #cpanel {
+  background-color: #30353f;
+  padding: 10px 15px;
+}
+
+/* Override Bootstrap */
+.btn:not(.btn-raised),
+.btn:not(.btn-raised).btn-default,
+.input-group-btn .btn:not(.btn-raised),
+.input-group-btn .btn:not(.btn-raised).btn-default {
+  color: #9ba3b4;
+}
+
+.form-group .form-control {
+  color: #9ba3b4;
+  background-image: linear-gradient(#009688, #009688), linear-gradient(#9ba3b4, #9ba3b4);
+}
+.form-group .form-control:focus {
+  color: #c8d5ef;
+}

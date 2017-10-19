@@ -1,0 +1,346 @@
+@import "color";
+
+#form-config {
+  .alpaca-container {
+    .alpaca-field-array,
+    .alpaca-field-object {
+      border-color: $color-border-medium;
+      background-color: $color-border-medium;
+    }
+  }
+
+  input[type='checkbox'] {
+    opacity: 1 !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    z-index: 1 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+  }
+
+  .form-group {
+    margin-top: 0 !important;
+  }
+
+  .alpaca-array-actionbar {
+    &.btn-group {
+      margin: 0;
+      padding: 0;
+    }
+
+    .btn {
+      background-color: $color-border-medium !important;
+      outline: none;
+    }
+  }
+
+  .form-group .help-block {
+    display: block;
+  }
+
+  span {
+    display: inline;
+  }
+}
+
+#cpanel {
+  padding: 0 !important;
+
+  div {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  #panel-components {
+    .components {
+      border-top: 1px solid $color-border-medium;
+
+      .component {
+        margin: 0 1.2vw 0.8vw 0;
+      }
+    }
+  }
+
+  #panel-components,
+  #panel-palette {
+    cursor: default;
+
+    .components {
+      .component {
+        display: inline-block;
+        padding: 0;
+        background-color: $color-border-medium;
+        overflow: hidden;
+        border-radius: 2px;
+        cursor: move;
+        cursor: -webkit-grab;
+        cursor: grab;
+        box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(0,0,0,0.24);
+        transition: box-shadow 0.2s ease;
+
+        &:hover {
+          box-shadow: 0 0 8px 0 rgba(0,0,0,0.12), 0 8px 8px 0 rgba(0,0,0,0.24);
+        }
+
+        &:active {
+          cursor: -webkit-grabbing;
+          cursor: grabbing;
+        }
+
+        .icon {
+          display: block;
+          width: 8vw;
+          height: 8vw;
+          min-width: 70px;
+          min-height: 70px;
+          text-align: center;
+          font-size: 5vw;
+          color: rgba($color-text-medium, .5);
+          line-height: 7vw;
+        }
+
+        .title {
+          display: block;
+          font-size: 1vw;
+          width: 8vw;
+          height: 20px;
+          min-width: 70px;
+          line-height: 20px;
+          margin-top: -20px;
+          padding: 0 0.3vw 0 0.1vw;
+          background-color: rgba($color-black, .7);
+          color: darken($color-white, 20);
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+
+          i {
+            display: inline-block;
+            vertical-align: middle;
+            padding-bottom: 1px;
+            color: $color-text-medium;
+            font-size: 1.1vw;
+          }
+        }
+      }
+
+      .spider {
+        i {
+          color: $color-cyan !important;
+        }
+      }
+
+      .scheduler {
+        i {
+          color: $color-orange !important;
+        }
+      }
+
+      .fetcher {
+        i {
+          color: $color-green !important;
+        }
+      }
+
+      .processor {
+        i {
+          color: $color-light-blue !important;
+        }
+      }
+
+      .pipeline {
+        i {
+          color: $color-purple !important;
+        }
+      }
+
+      .add-component {
+        display: inline-block;
+        padding: 0;
+        border-radius: 8px;
+        border: 2px dashed $color-border-medium;
+        margin: 0.5vw 1.7vw 1.3vw 0;
+        overflow: hidden;
+        cursor: pointer;
+        width: 7vw;
+        height: 7vw;
+        text-align: center;
+        transition: all 0.2s ease;
+
+        &:hover {
+          width: 4vw;
+          height: 4vw;
+          margin: 2vw 3.2vw 2.8vw 1.5vw;
+          border-style: solid;
+          border-color: $color-text-bright;
+          box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(0,0,0,0.24);
+
+          i {
+            color: $color-text-bright;
+            line-height: 4vw;
+          }
+        }
+
+        &:active {
+          box-shadow: none;
+        }
+
+        i {
+          font-size: 3vw;
+          color: rgba($color-text-medium, .2);
+          line-height: 7vw;
+          transition: all 0.2s ease;
+        }
+      }
+    }
+  }
+
+  #panel-palette {
+    display: none;
+    position: fixed;
+    right: 0;
+    min-height: 9vw;
+    min-width: 9vw;
+    margin: 1vw;
+    padding: 0.8vw 1.5vw 1.15vw;
+    border-radius: 3px;
+    max-height: 80vh;
+    overflow: auto;
+    background-color: rgba($color-background-medium, .6);
+    border: 2px solid $color-border-light;
+    cursor: default;
+
+    span.ctitle {
+      display: block;
+      position: fixed;
+      width: 8vw;
+      text-align: center;
+      font-size: 15px;
+      text-shadow: 0 0 10px $color-background-medium;
+    }
+
+    .components {
+      width: 8vw;
+      min-height: calc(30px + 8vw);
+      padding: 30px 0 0;
+
+      .component {
+        display: block;
+        margin-bottom: 1vw;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &:hover {
+          box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(0,0,0,0.24);
+        }
+      }
+    }
+
+    .btn {
+      width: 100%;
+      margin-top: 1vw;
+      padding: 10px 0;
+      background-color: $color-border-medium;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &.btn-success {
+        color: $color-dark-green;
+      }
+    }
+  }
+
+  #dustbin {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 11.5vw;
+    min-width: 70px;
+    height: 30px;
+    margin: 0 1vw 2vw 1vw;
+    padding: 0;
+    border-radius: 3px;
+    text-align: center;
+    background-color: rgba($color-background-medium, .6);
+    border: 2px solid $color-border-light;
+    cursor: default;
+    transition: all 0.2s ease;
+
+    i {
+      color: $color-text-medium;
+      font-size: 20px;
+      line-height: 25px;
+      transition: color 0.2s ease;
+    }
+
+    &.active {
+      border-color: $color-red;
+      i {
+        color: $color-red;
+      }
+    }
+
+    .component {
+      display: none;
+    }
+  }
+}
+
+#templates-dialog, #add-processor-dialog {
+  .component {
+    padding: 8px 0 0 6px;
+    margin: 4px 1px;
+    cursor: pointer;
+    width: 100%;
+    border-bottom: 2px solid transparent;
+    text-transform: none;
+    transition: all 0.2s ease;
+    overflow: hidden;
+
+    &:focus,
+    &:hover {
+      border-color: $color-text-bright;
+    }
+  }
+
+  i {
+    display: inline-block;
+    vertical-align: middle;
+    padding-bottom: 1px;
+    color: $color-text-medium;
+
+    &.fetchers {
+      color: $color-green;
+    }
+
+    &.processors {
+      color: $color-light-blue;
+    }
+
+    &.pipelines {
+      color: $color-purple;
+    }
+  }
+
+  .btn {
+    outline: none;
+  }
+}
+
+#templates-dialog {
+  .modal-body {
+    padding-top: 6px;
+  }
+}
+
+#btn-assemble {
+  display: none;
+}
+
+.btn:not(.btn-raised).btn-success, .input-group-btn .btn:not(.btn-raised).btn-success {
+    color: $color-green;
+}

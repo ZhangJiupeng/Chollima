@@ -1,0 +1,73 @@
+@import "color";
+
+#cpanel {
+  #monitor {
+    float: left;
+    width: 100%;
+    overflow: hidden;
+    background-color: inherit;
+    height: 400px;
+  }
+
+  #bar-status {
+    padding-top: 30px;
+    /* padding-left: 28px;*/
+    width: 95.2%;
+    margin: 0 auto;
+  }
+
+  #table-status {
+    tr {
+      td,
+      th {
+        border: none;
+      }
+
+      td {
+        background-color: #444b58;
+        zoom: 2;
+        vertical-align: middle;
+
+        span {
+          zoom: 0.5;
+          opacity: 0.5;
+          padding: 0 3px;
+        }
+      }
+
+      #lamp-status {
+        width: 10px;
+        height: 10px;
+        border-radius: 10px;
+        background-color: $color-dark-green;
+      }
+    }
+  }
+}
+
+.animate-blink {
+  -webkit-animation: twinkling 1.5s infinite;
+}
+@-webkit-keyframes twinkling {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+#mask {
+  font-weight: 400;
+  zoom: 1.2;
+
+  i {
+    vertical-align: middle;
+    padding-right: 8px;
+  }
+}

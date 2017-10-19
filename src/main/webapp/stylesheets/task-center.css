@@ -1,0 +1,109 @@
+/* Dark Theme */
+/* Light Theme */
+                 /*
+$color-background: #c9c9c9;
+$color-background-select: #212121;
+$color-background-bright: #fafafa;
+$color-background-dark: #e0e0e0;
+$color-background-medium: #f5f5f5;
+$color-background-light: #fafafa;
+$color-text-bright: #009688;
+$color-text-select: #ffffff;
+$color-text-dark: #212121;
+$color-text-medium: #303030;
+$color-text-light: #424242;
+$color-border-dark: #cccccc;
+$color-border-medium: #e0e0e0;
+$color-border-light: #f1eded;
+$color-light-blue: #2196f3;
+$color-blue: #2979ff;
+$color-dark-blue: #1565c0;
+$color-purple: #bb6dab;
+$color-yellow: #fdd835;
+$color-orange: #fb8c00;
+$color-pink: #ec407a;
+$color-red: #e53935;
+$color-green: #aeea00;
+$color-dark-green: #009688;
+$color-white: #ffffff;
+$color-black: #2a3131;
+$color-brown: #6d4c41;
+$color-cyan: #00bcd4;
+$color-grey: rgba(#3f4654, 0.78);*/
+body #viewport #cpanel {
+  padding-top: 0; }
+  body #viewport #cpanel .btn-group .btn {
+    background-color: #3d444e;
+    color: #9ba3b4;
+    outline: none;
+    border-radius: 0; }
+  body #viewport #cpanel .dropdown-menu > li > a {
+    text-transform: capitalize; }
+  body #viewport #cpanel #btn-add:hover,
+  body #viewport #cpanel #btn-launch:hover {
+    color: #78ab3d; }
+  body #viewport #cpanel #btn-rename:hover,
+  body #viewport #cpanel #btn-refresh:hover {
+    color: #6a9fb5; }
+  body #viewport #cpanel #btn-delete:hover,
+  body #viewport #cpanel #btn-unbind:hover {
+    color: #ef633a; }
+  body #viewport #cpanel #btn-abort:hover {
+    color: #e2914f; }
+  body #viewport #cpanel #btn-merge:hover {
+    color: #bd76ae; }
+  body #viewport #cpanel #btn-start:hover {
+    color: #78ab3d; }
+  body #viewport #cpanel .table tr th {
+    cursor: default; }
+    body #viewport #cpanel .table tr th label > span.checkbox-material:hover {
+      cursor: pointer; }
+    body #viewport #cpanel .table tr th label.checkbox {
+      margin: -3px 0;
+      padding: 0; }
+  body #viewport #cpanel .table tr td {
+    color: #9ba3b4;
+    vertical-align: middle; }
+    body #viewport #cpanel .table tr td.taskname {
+      cursor: pointer; }
+    body #viewport #cpanel .table tr td label > span.checkbox-material:hover {
+      cursor: pointer; }
+    body #viewport #cpanel .table tr td label.checkbox {
+      margin: -3px 0;
+      padding: 0; }
+      body #viewport #cpanel .table tr td label.checkbox span.check {
+        top: -2px; }
+  body #viewport #cpanel .table tbody > tr > td,
+  body #viewport #cpanel .table tbody > tr > th,
+  body #viewport #cpanel .table tfoot > tr > td,
+  body #viewport #cpanel .table tfoot > tr > th,
+  body #viewport #cpanel .table thead > tr > td,
+  body #viewport #cpanel .table thead > tr > th {
+    border-color: #3d444e; }
+body #add-dialog .modal-body {
+  padding-top: 0;
+  padding-bottom: 0; }
+body #rename-dialog .modal-body {
+  padding-top: 0;
+  padding-bottom: 0; }
+body #delete-dialog .modal-body {
+  padding-bottom: 0; }
+body #launch-dialog .modal-title i {
+  color: #75b5aa;
+  display: inline-block;
+  vertical-align: middle;
+  padding-bottom: 4px; }
+body #launch-dialog .modal-body {
+  padding-top: 6px; }
+  body #launch-dialog .modal-body button {
+    padding: 8px 0 0 6px;
+    margin: 4px 1px;
+    cursor: pointer;
+    width: 100%;
+    border-bottom: 2px solid transparent;
+    text-transform: none;
+    transition: all 0.2s ease;
+    overflow: hidden;
+    outline: none; }
+    body #launch-dialog .modal-body button:focus, body #launch-dialog .modal-body button:hover {
+      border-color: #ffcd10; }

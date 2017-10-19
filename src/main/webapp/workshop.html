@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Workshop - Chollima</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Bootstrap Material Design -->
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/ext/font-roboto.css">
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/ext/font-material-icons.css">
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/0.5.10/dist/css/bootstrap-material-design.min.css">
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/0.5.10/dist/css/ripples.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" type="text/css" href="./ext/toastr/build/toastr.min.css">
+  <!-- Alpaca -->
+  <link rel="stylesheet" type="text/css" href="./ext/alpaca/1.5.23/dist/alpaca/bootstrap/alpaca.min.css">
+  <!-- Dragula -->
+  <link rel="stylesheet" type="text/css" href="./ext/dragula/3.7.2/dist/dragula.min.css">
+  <!-- Chollima -->
+  <link rel="stylesheet" type="text/css" href="./stylesheets/frame.css">
+  <link rel="stylesheet" type="text/css" href="./stylesheets/workshop.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div id="sidebar" class="col-xs-12 hidden-xs col-sm-1 col-md-2">
+        <span id="brand">
+            <h1 class="text-capitalize text-center hidden-xs hidden-sm">chollima</h1>
+            <img src="./img/gospy-logo-flat.svg" alt="logo" class="visible-xs visible-sm">
+        </span>
+        <ul class="nav nav-pills nav-stacked">
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Dashboard">
+            <a href="./dashboard.html" class="btn">
+              <i class="material-icons">&#xE6DF;</i>
+              <font class="hidden-sm">dashboard</font>
+              <span class="badge hidden-xs hidden-sm">0</span>
+            </a>
+          </li>
+          <li class="active" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Workshop">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE30D;</i>
+              <font class="hidden-sm">workshop</font>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Task Center">
+            <a href="./task-center.html" class="btn">
+              <i class="material-icons">&#xE163;</i>
+              <font class="hidden-sm">task center</font>
+            </a>
+          </li>
+          <!-- <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Repository">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE1DB;</i>
+              <font class="hidden-sm">repository</font>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Extensions">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE87B;</i>
+              <font class="hidden-sm">extensions</font>
+              <span class="badge hidden-xs hidden-sm">0</span>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Settings">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE8B8;</i>
+              <font class="hidden-sm">settings</font>
+            </a>
+          </li> -->
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Logout">
+            <a href="./logout.html" class="btn">
+              <i class="material-icons">&#xE879;</i>
+              <font class="hidden-sm">logout</font>
+            </a>
+          </li>
+      </div>
+      <div id="viewport" class="col-sm-11 col-sm-offset-1 col-md-10 col-md-offset-2">
+        <div class="row">
+          <header class="col-md-12">
+            <ol class="breadcrumb">
+              <li><a href="#">Home</a></li>
+              <li><a href="./workshop.html">Workshop</a></li>
+              <li class="active">Lobby</li>
+            </ol>
+          </header>
+          <div id="cpanel" class="col-md-12" unselectable="on" onselectstart="return false;" style="-moz-user-select:none;">
+            <div id="panel-components" class="col-md-12">
+              <h4>Spiders</h4>
+              <div id="spiders" class="components">
+                <div id="btn-newspider" class="add-component">
+                  <i class="material-icons">&#xE145;</i>
+                </div>
+              </div>
+              <h4>Schedulers</h4>
+              <div id="schedulers" class="components">
+                <div class="component scheduler" component-id="0">
+                  <span class="icon">R</span>
+                  <span class="title" title="Verifiable Scheduler">
+                    <i class="material-icons">&#xE16D;</i>
+                    Verifiable Scheduler
+                  </span>
+                </div>
+              </div>
+              <h4>Fetchers</h4>
+              <div id="fetchers" class="components">
+                <div class="add-component" data-toggle="modal" data-target="#templates-dialog">
+                  <i class="material-icons">&#xE145;</i>
+                </div>
+              </div>
+              <h4>Processors</h4>
+              <div id="processors" class="components">
+                <div class="add-component" data-toggle="modal" data-target="#templates-dialog">
+                  <i class="material-icons">&#xE145;</i>
+                </div>
+              </div>
+              <h4>Pipelines</h4>
+              <div id="pipelines" class="components">
+                <div class="add-component" data-toggle="modal" data-target="#templates-dialog">
+                  <i class="material-icons">&#xE145;</i>
+                </div>
+              </div>
+            </div>
+            <div id="panel-palette">
+              <span class="ctitle">New Spider</span>
+              <div id="assembly-area" class="components"></div>
+              <div id="btn-assemble" class="btn btn-success" data-toggle="modal" data-target="#assemble-dialog">assemble</div>
+            </div>
+            <div id="dustbin"><i class="material-icons">&#xE92B;</i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="config-dialog" class="modal fade" tabindex="-1" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div id="form-config"></div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button id="btn-build" type="button" class="btn btn-success" data-dismiss="modal">build<div class="ripple-container"></div></button>
+          <button type="button" class="btn" data-dismiss="modal">cancel<div class="ripple-container"></div></button>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div id="confirm-dialog" class="modal fade" tabindex="-1" style="display: none;" component-id="cidx">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button id="btn-delete" type="button" class="btn btn-warning" data-dismiss="modal">delete<div class="ripple-container"></div></button>
+          <button type="button" class="btn" data-dismiss="modal">cancel<div class="ripple-container"></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="templates-dialog" class="modal" tabindex="-1" style="display: none;">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body"></div>
+      </div>
+    </div>
+  </div>
+  <div id="add-processor-dialog" class="modal fade" tabindex="-1" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title"><i class="material-icons processors">&#xE1B8;</i>&nbsp;Add New Page Processor</h4>
+        </div>
+        <div class="modal-body">Reaching forward to PPDesigner!</div>
+        <div class="modal-footer">
+          <button id="btn-continue" type="button" class="btn btn-success" data-dismiss="modal">continue<div class="ripple-container"></div></button>
+          <button type="button" class="btn" data-dismiss="modal">cancel<div class="ripple-container"></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="assemble-dialog" class="modal fade" tabindex="-1" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Create New Spider</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group label-static is-empty">
+            <label class="control-label">Name</label>
+            <input id="text-spidername" type="text" class="form-control" value="">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-buildspider" type="button" class="btn btn-success" data-dismiss="modal">build<div class="ripple-container"></div></button>
+          <button type="button" class="btn" data-dismiss="modal" onclick="$('#text-spidername').val('')">cancel<div class="ripple-container"></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Scripts -->
+  <script src="./ext/jquery/dist/jquery.min.js" charset="utf-8"></script>
+  <script src="./ext/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="./ext/bootstrap-material-design/0.5.10/dist/js/material.min.js" charset="utf-8"></script>
+  <script src="./ext/bootstrap-material-design/0.5.10/dist/js/ripples.js" charset="utf-8"></script>
+  <script src="./ext/toastr/build/toastr.min.js" charset="utf-8"></script>
+  <script src="./ext/handlebars/handlebars.min.js" charset="utf-8"></script>
+  <script src="./ext/alpaca/1.5.23/dist/alpaca/bootstrap/alpaca.min.js"></script>
+  <script src="./ext/dragula/3.7.2/dist/dragula.min.js"></script>
+  <script src="./js/constant.js" charset="utf-8"></script>
+  <script>
+    $.material.init();
+    $.material.ripples();
+    $.material.input();
+    $.material.checkbox();
+    $.material.radio();
+    $(function() {
+      $('[data-toggle="popover"]').popover({
+        delay: {
+          "show": 500,
+          "hide": 100
+        }
+      }).on("show.bs.popover", function() {
+        return $("#sidebar > ul > li > a > font").is(":hidden");
+      });
+    });
+    toastr.options = {
+      "progressBar": true
+    };
+  </script>
+  <script>
+    function getForm(componentClass) {
+      var form = false;
+      $.ajax({
+        url: API_FORM_BASE + componentClass + "/form",
+        type: "get",
+        dataType: "json",
+        async: false,
+        success: function(result) {
+          if (result.status == "success") {
+            form = result.data;
+          } else {
+            toastr["error"](result.data);
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+        }
+      });
+      return form;
+    }
+
+    function getDefaultConfig(type, componentClass) {
+      var config = false;
+
+      var targetLink;
+      switch (type) {
+        case "fetcher":
+          targetLink = API_FETCHER_BASE + componentClass + "/template";
+          break;
+        case "processor":
+          targetLink = API_PROCESSOR_BASE + componentClass + "/template";
+          break;
+        case "pipeline":
+          targetLink = API_PIPELINE_BASE + componentClass + "/template";
+          break;
+        default:
+          toastr["error"]("unknown type: " + type);
+          return false;
+      }
+
+      $.ajax({
+        url: targetLink,
+        type: "get",
+        dataType: "json",
+        async: false,
+        success: function(result) {
+          if (result.status == "success") {
+            config = result.data;
+          } else {
+            toastr["error"](result.data);
+            return false;
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+          return false;
+        }
+      });
+
+      return config;
+    }
+
+    function getTypeName(type) {
+      switch (type) {
+        case 1:
+          return "scheduler";
+        case 2:
+          return "fetcher";
+        case 3:
+          return "processor";
+        case 4:
+          return "pipeline";
+        default:
+          return null;
+      }
+    }
+
+    function loadComponents() {
+      $.ajax({
+        url: API_COMPONENT_BASE,
+        type: "get",
+        dataType: "json",
+        async: false,
+        success: function(result) {
+          if (result.status == "success") {
+            for (var i = 0; i < result.data.length; i++) {
+              var e = result.data[i];
+              var type = getTypeName(e.type);
+              var componentHtml = '<div class="component ' + type + '" component-id="' + e.id + '">';
+              componentHtml += '<span class="icon">' + e.name.charAt(0).toUpperCase() + '</span><span class="title" title="' + e.name + '"><i class="material-icons">';
+              switch (type) {
+                case "scheduler":
+                  componentHtml += '&#xE16D;</i>' + e.name + '</span></div>';
+                  $("#schedulers .add-component").before(componentHtml);
+                  break;
+                case "fetcher":
+                  componentHtml += '&#xE2C4;</i>' + e.name + '</span></div>';
+                  $("#fetchers .add-component").before(componentHtml);
+                  break;
+                case "processor":
+                  componentHtml += '&#xE1B8;</i>' + e.name + '</span></div>';
+                  $("#processors .add-component").before(componentHtml);
+                  break;
+                case "pipeline":
+                  componentHtml += '&#xE0B6;</i>' + e.name + '</span></div>';
+                  $("#pipelines .add-component").before(componentHtml);
+                  break;
+                default:
+                  toastr["error"]("unknown component type " + e.type);
+              }
+            };
+          } else {
+            toastr["error"](result.data);
+            return false;
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+          return false;
+        }
+      });
+      $.ajax({
+        url: API_SPIDER_BASE,
+        type: "get",
+        dataType: "json",
+        async: false,
+        success: function(result) {
+          if (result.status == "success") {
+            for (var i = 0; i < result.data.length; i++) {
+              var spider = result.data[i];
+              var spiderHtml = '<div class="component spider" component-id="' + spider.id + '">' +
+                '<span class="icon">' + spider.name.charAt(0).toUpperCase() +
+                '</span><span class="title" title="' + spider.name + '"><i class="material-icons">' +
+                '&#xE868;</i>' + spider.name + '</span></div>';
+              $("#spiders .add-component").before(spiderHtml);
+            };
+          } else {
+            toastr["error"](result.data);
+            return false;
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+          return false;
+        }
+      });
+    }
+
+    function loadForm(type, componentClass) {
+      var form = getForm(componentClass);
+      var formData = getDefaultConfig(type, componentClass);
+
+      if (!form || !formData) {
+        return false;
+      }
+      form.data = formData;
+      if (form.options == undefined) {
+        form.options = {};
+      }
+      form.options.form = {
+        "buttons": {
+          "build": {
+            "title": "Build",
+            "click": function() {
+              var value = this.getValue();
+              if (value.name == undefined) {
+                toastr["warning"]("Please specify a name for this component.");
+              } else {
+                $.ajax({
+                  url: API_COMPONENT_BASE + type + "/" + componentClass + "/" + value.name,
+                  type: "post",
+                  contentType: "application/json;charset=UTF-8",
+                  dataType: "json",
+                  data: JSON.stringify(value),
+                  async: false,
+                  success: function(result) {
+                    if (result.status == "success") {
+                      var componentHtml = '<div class="component ' + type + '" component-id="' + result.data.id + '">';
+                      componentHtml += '<span class="icon">' + result.data.name.charAt(0).toUpperCase() + '</span><span class="title" title="' + result.data.name + '"><i class="material-icons">';
+                      switch (type) {
+                        case "scheduler":
+                          componentHtml += '&#xE16D;</i>' + result.data.name + '</span></div>';
+                          $("#schedulers .add-component").before(componentHtml);
+                          break;
+                        case "fetcher":
+                          componentHtml += '&#xE2C4;</i>' + result.data.name + '</span></div>';
+                          $("#fetchers .add-component").before(componentHtml);
+                          break;
+                        case "processor":
+                          componentHtml += '&#xE1B8;</i>' + result.data.name + '</span></div>';
+                          $("#processors .add-component").before(componentHtml);
+                          break;
+                        case "pipeline":
+                          componentHtml += '&#xE0B6;</i>' + result.data.name + '</span></div>';
+                          $("#pipelines .add-component").before(componentHtml);
+                          break;
+                        default:
+                          toastr["error"]("unknown component type " + result.data.type);
+                      }
+                      $("#config-dialog").modal("hide");
+                    } else {
+                      toastr["error"](result.data);
+                      return false;
+                    }
+                  },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+                    return false;
+                  }
+                });
+              }
+            },
+            "styles": "btn btn-success"
+          },
+          "cancel": {
+            "title": "Cancel",
+            "click": function() {
+              $("#config-dialog").modal("hide");
+            },
+            "styles": "btn"
+          }
+        }
+      };
+      if (form.schema.properties == undefined) {
+        form.schema.properties = {};
+      }
+      form.schema.properties.name = {
+        "title": "Component Name",
+        "type": "string",
+        "required": true
+      };
+      $("#form-config").html("").alpaca(form);
+      return true;
+    }
+
+    function bindDragula() {
+      dragula([
+        document.getElementById("spiders"),
+        document.getElementById("schedulers"),
+        document.getElementById("fetchers"),
+        document.getElementById("processors"),
+        document.getElementById("pipelines"),
+        document.getElementById("assembly-area"),
+        document.getElementById("dustbin")
+      ], {
+        copy: function(el, source) {
+          return (
+            source === document.getElementById("spiders") ||
+            source === document.getElementById("schedulers") ||
+            source === document.getElementById("fetchers") ||
+            source === document.getElementById("processors") ||
+            source === document.getElementById("pipelines"))
+        },
+        revertOnSpill: true,
+        invalid: function(el, handle) {
+          if (el.parentNode === document.getElementById("assembly-area")) {
+            return false;
+          } else {
+            var exists = false;
+            var originComponentId = $(el).attr("component-id");
+            if (originComponentId != undefined) {
+              $("#assembly-area").children(".component").each(function() {
+                if ($(this).attr("component-id") == originComponentId) {
+                  exists = true;
+                  toastr["warning"]("Do not add the same component repeatedly.");
+                  return;
+                }
+              });
+            }
+            return el.className == "add-component" || el.className == "material-icons" || exists;
+          }
+        },
+        accepts: function(el, target) {
+          return target === document.getElementById("assembly-area") ||
+            target === document.getElementById("dustbin")
+        },
+        moves: function(el, source, handle, sibling) {
+          return true;
+        }
+      }).on('drop', function(el, target, source, sibling) {
+        if (el.parentNode === document.getElementById("dustbin")) {
+          if ($(source).attr("id") != "assembly-area") {
+            $("#confirm-dialog .modal-title").html("Delete Component");
+            $("#confirm-dialog").attr("component-id", $(el).attr("component-id"));
+            if ($(el).hasClass("spider")) {
+              $("#confirm-dialog").attr("spider", true);
+            }
+            var confirmDialogBody = $("#confirm-dialog .modal-body");
+            confirmDialogBody.html("Are you sure to delete " + $(el).children(".title").html() + "?");
+            confirmDialogBody.find("i").remove();
+            $("#confirm-dialog").modal();
+          }
+          el.parentNode.removeChild(el);
+        }
+        if (el.parentNode === document.getElementById("assembly-area") && $(el).hasClass("spider")) {
+          el.parentNode.removeChild(el);
+          toastr["warning"]("Cannot add spider to a spider.");
+        } else {
+          if (
+            $("#assembly-area").children(".scheduler").size() > 0 &&
+            $("#assembly-area").children(".fetcher").size() > 0 &&
+            $("#assembly-area").children(".processor").size() > 0) {
+            $("#btn-assemble").slideDown(200);
+          } else {
+            $("#btn-assemble").hide();
+            if ($("#assembly-area").children(".component").size() == 0) {
+              $("#panel-palette").hide();
+            }
+          }
+        }
+      }).on('shadow', function(el) {
+        return !el.parentNode === document.getElementById("dustbin");
+      }).on('over', function(el, container) {
+        if ($(container).attr("id") == "dustbin") {
+          container.className = 'active';
+        }
+      }).on('out', function(el, container) {
+        container.className = container.className.replace('active', '');
+      });
+    }
+
+    $("#btn-newspider").click(function() {
+      if (!$("#panel-palette").is(":visible")) {
+        $("#panel-palette").show();
+        toastr["info"]("Drag components into the \"New Spider\" palette to assemble a new spider.");
+      } else if ($("#assembly-area").children(".component").size() > 0) {
+        $("#confirm-dialog .modal-title").html("Create New Spider");
+        $("#confirm-dialog").attr("component-id", "new-palette");
+        $("#confirm-dialog .modal-body").html("There are still components in New Spider Palette, delete them for a new palette?");
+        $("#confirm-dialog").modal();
+      }
+    });
+
+    $("#fetchers .add-component").click(function() {
+      $("#templates-dialog .modal-title").html('<i class="fetchers material-icons">&#xE2C4;</i>&nbsp;Add New Fetcher');
+      $.ajax({
+        url: API_FETCHER_BASE + "template",
+        type: "get",
+        dataType: "json",
+        async: false,
+        success: function(result) {
+          if (result.status == "success") {
+            var componentList = "";
+            for (var key in result.data) {
+              componentList += "<button class='component fetcher btn' component-id='" + result.data[key] + "'>\
+              <span class='title'>" + key + "</span></button>";
+            }
+            if (componentList != "") {
+              $("#templates-dialog .modal-body").html(componentList);
+            } else {
+              toastr["warning"]("Component Not Found.");
+              $("#templates-dialog").modal('hide');
+            }
+          } else {
+            toastr["error"](result.data);
+            return false;
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+          return false;
+        }
+      });
+    });
+
+    $("#pipelines .add-component").click(function() {
+      $("#templates-dialog .modal-title").html('<i class="pipelines material-icons">&#xE0B6;</i>&nbsp;Add New Pipeline');
+      $.ajax({
+        url: API_PIPELINE_BASE + "template",
+        type: "get",
+        dataType: "json",
+        async: false,
+        success: function(result) {
+          if (result.status == "success") {
+            var componentList = "";
+            for (var key in result.data) {
+              componentList += "<button class='component pipeline btn' component-id='" + result.data[key] + "'>\
+                <span class='title'>" + key + "</span></button>";
+            }
+            if (componentList != "") {
+              $("#templates-dialog .modal-body").html(componentList);
+            } else {
+              toastr["warning"]("Component Not Found.");
+              $("#templates-dialog").modal('hide');
+            }
+          } else {
+            toastr["error"](result.data);
+            return false;
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+          return false;
+        }
+      });
+    });
+
+    $("#processors .add-component").click(function() {
+      $("#templates-dialog .modal-title").html('<i class="processors material-icons">&#xE1B8;</i>&nbsp;Add New Processor');
+      $.ajax({
+        url: API_PROCESSOR_BASE + "template",
+        type: "get",
+        dataType: "json",
+        async: false,
+        success: function(result) {
+          if (result.status == "success") {
+            var componentList = "";
+            for (var key in result.data) {
+              componentList += "<button class='component processor btn' component-id='" + result.data[key] + "'>\
+                <span class='title'>" + key + "</span></button>";
+            }
+            if (componentList != "") {
+              $("#templates-dialog .modal-body").html(componentList);
+            } else {
+              toastr["warning"]("Component Not Found.");
+              $("#templates-dialog").modal('hide');
+            }
+          } else {
+            toastr["error"](result.data);
+            return false;
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+          return false;
+        }
+      });
+    });
+
+    $(document).on("click", "#templates-dialog .modal-body button", function() {
+      $("#templates-dialog").modal('hide');
+      var type = $(this).hasClass("pipeline") ? "pipeline" :
+        ($(this).hasClass("fetcher") ? "fetcher" : "processor");
+      var componentClass = $(this).attr("component-id");
+      // build-in xpath processor
+      if (componentClass == "cc.gospy.chollima.entity.component.impl.XPathProcessComponent") {
+        $("#add-processor-dialog").modal();
+      } else {
+        try {
+          if (loadForm(type, componentClass)) {
+            $("#config-dialog").modal();
+          } else {
+            toastr["error"]("Load Form Failure.");
+            return false;
+          }
+        } catch (e) {
+          toastr["error"](e);
+        }
+      }
+    });
+
+    $("#btn-delete").click(function() {
+      var target = $("#confirm-dialog").attr("component-id");
+      if (target == "new-palette") {
+        $("#assembly-area").html("");
+        $("#btn-assemble").hide();
+      } else {
+        var isSpiderComponent = $("#confirm-dialog").attr("spider");
+        if (isSpiderComponent != undefined && isSpiderComponent == "true") {
+          $.ajax({
+            url: API_SPIDER_BASE + target,
+            type: "delete",
+            dataType: "json",
+            async: false,
+            success: function(result) {
+              if (result.status == "success") {
+                toastr["success"]("Spider deleted!");
+                $(".component[component-id=" + target + "]").remove();
+              } else {
+                toastr["error"](result.data);
+                return false;
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+              return false;
+            }
+          });
+        } else {
+          $.ajax({
+            url: API_COMPONENT_BASE + target,
+            type: "delete",
+            dataType: "json",
+            async: false,
+            success: function(result) {
+              if (result.status == "success") {
+                if (result.data == true) {
+                  toastr["success"]("Component deleted!");
+                  $(".component[component-id=" + target + "]").remove();
+                } else {
+                  toastr["warning"]("Delete component failure, please try again later.");
+                }
+              } else {
+                toastr["error"](result.data);
+                return false;
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+              return false;
+            }
+          });
+        }
+      }
+    });
+
+    $("#btn-buildspider").click(function() {
+      if ($('#text-spidername').val().trim() == "") {
+        toastr["warning"]("Please specify a name for this spider.");
+        return false;
+      } else {
+        var name = $('#text-spidername').val();
+        var components = [];
+        $("#assembly-area .component").each(function() {
+          if (!$(this).hasClass("scheduler")) {
+            components.push($(this).attr("component-id"));
+          }
+        });
+        $('#text-spidername').val('');
+        $.ajax({
+          url: API_SPIDER_BASE + name,
+          type: "post",
+          dataType: "json",
+          data: {
+            "components": components
+          },
+          async: false,
+          success: function(result) {
+            if (result.status == "success") {
+              var spider = result.data;
+              var spiderHtml = '<div class="component spider" component-id="' + spider.id + '">' +
+                '<span class="icon">' + spider.name.charAt(0).toUpperCase() +
+                '</span><span class="title" title="' + spider.name + '"><i class="material-icons">' +
+                '&#xE868;</i>' + spider.name + '</span></div>';
+              $("#spiders .add-component").before(spiderHtml);
+              $("#panel-palette").fadeOut();
+              $("#assembly-area").html("");
+              $("#btn-assemble").hide();
+            } else {
+              toastr["error"](result.data);
+              return false;
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+            return false;
+          }
+        });
+      }
+    });
+
+    $("#btn-continue").click(function() {
+      location.href = "page-preview.html";
+    });
+
+    loadComponents();
+    bindDragula();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+@import "color";
+
+body {
+  #viewport {
+    #cpanel {
+      padding-top: 0;
+
+      .btn-group .btn {
+        background-color: $color-border-medium;
+        color: $color-text-medium;
+        outline: none;
+        border-radius: 0;
+      }
+
+      .dropdown-menu > li > a {
+        text-transform: capitalize;
+      }
+
+      #btn-add,
+      #btn-launch {
+        &:hover {
+          color: $color-dark-green;
+        }
+      }
+
+      #btn-rename,
+      #btn-refresh {
+        &:hover {
+          color: $color-light-blue;
+        }
+      }
+
+      #btn-delete,
+      #btn-unbind {
+        &:hover {
+          color: $color-red;
+        }
+      }
+
+      #btn-abort {
+        &:hover {
+          color: $color-orange;
+        }
+      }
+
+      #btn-merge {
+        &:hover {
+          color: $color-purple;
+        }
+      }
+
+      #btn-start {
+        &:hover {
+          color: $color-dark-green;
+        }
+      }
+
+      .table {
+        tr {
+          th {
+            cursor: default;
+
+            label > span.checkbox-material:hover {
+              cursor: pointer;
+            }
+
+            label.checkbox {
+              margin: -3px 0;
+              padding: 0;
+            }
+          }
+
+          td {
+            color: $color-text-medium;
+            vertical-align: middle;
+
+            &.taskname {
+              cursor: pointer;
+            }
+
+            label > span.checkbox-material:hover {
+              cursor: pointer;
+            }
+
+            label.checkbox {
+              margin: -3px 0;
+              padding: 0;
+
+              span.check {
+                top: -2px;
+              }
+            }
+          }
+        }
+
+        tbody > tr > td,
+        tbody > tr > th,
+        tfoot > tr > td,
+        tfoot > tr > th,
+        thead > tr > td,
+        thead > tr > th {
+          border-color: $color-border-medium;
+        }
+      }
+    }
+  }
+
+  #add-dialog {
+    .modal-body {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  #rename-dialog {
+    .modal-body {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  #delete-dialog {
+    .modal-body {
+      padding-bottom: 0;
+    }
+  }
+
+  #launch-dialog {
+    .modal-title {
+      i {
+        color: #75b5aa;
+        display: inline-block;
+        vertical-align: middle;
+        padding-bottom: 4px;
+      }
+    }
+
+    .modal-body {
+      padding-top: 6px;
+
+      button {
+        padding: 8px 0 0 6px;
+        margin: 4px 1px;
+        cursor: pointer;
+        width: 100%;
+        border-bottom: 2px solid transparent;
+        text-transform: none;
+        transition: all 0.2s ease;
+        overflow: hidden;
+        outline: none;
+
+        &:focus,
+        &:hover {
+          border-color: $color-text-bright;
+        }
+      }
+    }
+  }
+}

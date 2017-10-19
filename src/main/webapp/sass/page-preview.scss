@@ -1,0 +1,145 @@
+@import "color";
+
+#viewport {
+  .input-group {
+    .form-group {
+      margin-top: 3px;
+
+      input {
+        background-color: $color-border-medium;
+        padding: 7px 0.8rem;
+      }
+    }
+
+    .input-group-btn {
+      padding: 0 0 10px;
+
+      .btn {
+        background-color: $color-background-light;
+        margin: 0 0 0 0.1rem;
+        padding: 7px 10px;
+        outline: none;
+
+        &:hover {
+          background-color: inherit;
+          color: $color-text-bright;
+        }
+      }
+
+      #btn-save {
+        background-color: $color-background-medium;
+      }
+    }
+  }
+
+  .nav-tabs {
+    background-color: $color-text-bright;
+    border-color: $color-background-dark;
+
+    li {
+      &.active {
+        background-color: mix($color-border-medium, $color-text-bright, 85%);
+
+        a {
+          color: $color-text-bright!important;
+        }
+      }
+
+      a {
+        line-height: 0.7;
+      }
+    }
+  }
+
+  .tab-content {
+    .tab-pane {
+      width: 100%;
+      overflow: auto;
+      border-radius: 0;
+      border: none;
+      color: $color-white;
+      background-color: $color-background;
+    }
+
+    .table {
+      tr {
+        th {
+          cursor: default;
+        }
+
+        td {
+          color: $color-text-medium;
+        }
+      }
+
+      tbody > tr > td,
+      tbody > tr > th,
+      tfoot > tr > td,
+      tfoot > tr > th,
+      thead > tr > td,
+      thead > tr > th {
+        border-color: $color-border-medium;
+      }
+    }
+
+    #raw {
+      margin-bottom: 9px;
+      background-color: $color-black;
+    }
+
+    #toolbar {
+      position: fixed;
+      bottom: -1.1rem;
+      margin-left: 0.9rem;
+
+      button {
+        background-color: $color-background-medium;
+        color: $color-text-medium;
+        border-radius: 0;
+        outline: none;
+        padding: 5px;
+        z-index: 999;
+        opacity: 0.7;
+        zoom: 0.8;
+
+        &:hover {
+          opacity: 0.9;
+        }
+
+        &.active {
+          opacity: 0.9;
+          color: $color-text-bright;
+        }
+      }
+
+      #xpath {
+        bottom: 50px;
+        margin-left: 28px;
+        padding-left: 5px;
+        padding-right: 5px;
+        position: fixed;
+        width: 170px;
+        height: 29px;
+        opacity: 0.7;
+        background-color: $color-background-medium;
+        color: $color-text-light;
+        display: none;
+      }
+    }
+  }
+
+  iframe {
+    width: 100%;
+    background-color: $color-background;
+    .c-link {
+      background-color: black;
+    }
+  }
+}
+
+.nav-tabs > li > a,
+.nav-tabs > li > a:focus,
+.nav-tabs > li > a:hover {
+  color: $color-background-medium!important;
+  border-radius: 0;
+}

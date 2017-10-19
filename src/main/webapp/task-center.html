@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Task Center - Chollima</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Bootstrap Material Design -->
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/ext/font-roboto.css">
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/ext/font-material-icons.css">
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/0.5.10/dist/css/bootstrap-material-design.min.css">
+  <link rel="stylesheet" type="text/css" href="./ext/bootstrap-material-design/0.5.10/dist/css/ripples.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" type="text/css" href="./ext/toastr/build/toastr.min.css">
+  <!-- Chollima -->
+  <link rel="stylesheet" type="text/css" href="./stylesheets/frame.css">
+  <link rel="stylesheet" type="text/css" href="./stylesheets/task-center.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div id="sidebar" class="col-xs-12 hidden-xs col-sm-1 col-md-2">
+        <span id="brand">
+            <h1 class="text-capitalize text-center hidden-sm">chollima</h1>
+            <img src="./img/gospy-logo-flat.svg" alt="logo" class="visible-xs visible-sm">
+        </span>
+        <ul class="nav nav-pills nav-stacked">
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Dashboard">
+            <a id="link-dashboard" href="./dashboard.html" class="btn">
+              <i class="material-icons">&#xE6DF;</i>
+              <font class="hidden-sm">dashboard</font>
+              <span class="badge hidden-xs hidden-sm">0</span>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Workshop">
+            <a href="./workshop.html" class="btn">
+              <i class="material-icons">&#xE30D;</i>
+              <font class="hidden-sm">workshop</font>
+            </a>
+          </li>
+          <li class="active" data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Task Center">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE163;</i>
+              <font class="hidden-sm">task center</font>
+            </a>
+          </li>
+          <!-- <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Repository">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE1DB;</i>
+              <font class="hidden-sm">repository</font>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Extensions">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE87B;</i>
+              <font class="hidden-sm">extensions</font>
+              <span class="badge hidden-xs hidden-sm">0</span>
+            </a>
+          </li>
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Settings">
+            <a href="javascript:void(0)" class="btn">
+              <i class="material-icons">&#xE8B8;</i>
+              <font class="hidden-sm">settings</font>
+            </a>
+          </li> -->
+          <li data-container="body" data-trigger="hover" data-toggle="popover" data-placement="right" data-content="Logout">
+            <a href="./logout.html" class="btn">
+              <i class="material-icons">&#xE879;</i>
+              <font class="hidden-sm">logout</font>
+            </a>
+          </li>
+      </div>
+      <div id="viewport" class="col-sm-11 col-sm-offset-1 col-md-10 col-md-offset-2">
+        <div class="row">
+          <header class="col-md-12">
+            <ol class="breadcrumb">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Task Center</a></li>
+              <li class="active">Task Group</li>
+            </ol>
+          </header>
+          <div id="cpanel" class="col-md-12">
+            <div class="btn-group btn-group-sm" role="group">
+              <button id="btn-add" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                add group <span class="caret"></span>
+              </button>
+              <ul class="nav dropdown-menu">
+                <li><a data-toggle="modal" data-target="#add-dialog">from url pattern</a></li>
+                <li><a>from page preview</a></li>
+              </ul>
+            </div>
+            <div class="btn-group btn-group-sm" role="group">
+              <button id="btn-refresh" class="btn">refresh</button>
+            </div>
+            <div class="btn-group btn-group-sm" role="group">
+              <button id="btn-rename" class="btn" data-toggle="modal" data-target="#rename-dialog">rename</button>
+              <button id="btn-merge" class="btn">merge</button>
+              <button id="btn-delete" class="btn" data-toggle="modal" data-target="#delete-dialog">delete</button>
+            </div>
+            <div class="btn-group btn-group-sm" role="group">
+              <button id="btn-launch" class="btn">launch</button>
+              <button id="btn-unbind" class="btn">unbind</button>
+              <button id="btn-start" class="btn">start</button>
+              <button id="btn-abort" class="btn">abort</button>
+            </div>
+            <div class="table-responsive">
+              <table id="table-tasks" class="table table-striped">
+                <tr>
+                  <th>
+                    <label class="form-group checkbox">
+                      <input type="checkbox">
+                      <span class="checkbox-material">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </th>
+                  <th>Group Name</th>
+                  <th>Initial Task Count</th>
+                  <th>Creation Time</th>
+                  <th>Last Modified</th>
+                  <th style="text-align:center">Status</th>
+                </tr>
+                <!--
+                <tr>
+                  <td>
+                    <label class="form-group checkbox" on="false">
+                      <input type="checkbox">
+                      <span class="checkbox-material">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </td>
+                  <td class="taskname">Demo Task 2</td>
+                  <td>9</td>
+                  <td>2017/4/17 18:29</td>
+                  <td>2017/4/17 18:30</td>
+                  <td><span class="label label-success">RUNNING</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="form-group checkbox" on="false">
+                      <input type="checkbox">
+                      <span class="checkbox-material">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </td>
+                  <td class="taskname">Demo Task 4</td>
+                  <td>9</td>
+                  <td>2017/4/17 18:29</td>
+                  <td>2017/4/17 18:30</td>
+                  <td><span class="label label-default">STOPPED</span></td>
+                  <td><span class="label label-danger">FAILURE</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="form-group checkbox" on="false">
+                      <input type="checkbox">
+                      <span class="checkbox-material">
+                        <span class="check"></span>
+                      </span>
+                    </label>
+                  </td>
+                  <td class="taskname">Demo Task 5</td>
+                  <td>9</td>
+                  <td>2017/4/17 18:29</td>
+                  <td>2017/4/17 18:30</td>
+                  <td><span class="label label-default">STOPPED</span></td>
+                </tr>-->
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="add-dialog" class="modal fade" tabindex="-1" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">New Task Group</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group label-floating is-empty">
+            <label class="control-label">Name</label>
+            <input id="text-name" type="text" class="form-control">
+          </div>
+          <div class="form-group label-floating is-empty">
+            <label class="control-label">Url Pattern</label>
+            <input id="text-urlpattern" type="text" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btn-addgroup" class="btn btn-success" data-dismiss="modal">create<div class="ripple-container"></div></button>
+          <button type="button" class="btn" data-dismiss="modal" onclick="$('#text-name').val('');$('#text-urlpattern').val('')">cancel<div class="ripple-container"></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="rename-dialog" class="modal fade" tabindex="-1" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Rename Task Group</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group label-static is-empty">
+            <label class="control-label">New group name</label>
+            <input id="text-rename" type="text" class="form-control" value="">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="btn-renamegroup" class="btn btn-success" data-dismiss="modal">rename<div class="ripple-container"></div></button>
+          <button type="button" class="btn" data-dismiss="modal">cancel<div class="ripple-container"></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="delete-dialog" class="modal fade" tabindex="-1" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Delete Task Group</h4>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button id="btn-deletegroup" type="button" class="btn btn-warning" data-dismiss="modal">delete<div class="ripple-container"></div></button>
+          <button type="button" class="btn" data-dismiss="modal">cancel<div class="ripple-container"></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="task-dialog" class="modal fade" tabindex="-1" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-dismiss="modal">close<div class="ripple-container"></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="launch-dialog" class="modal fade" tabindex="-1" style="display: none;">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title"><i class="material-icons">&#xE868;</i>&nbsp;Choose a spider</h4>
+        </div>
+        <div class="modal-body"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Scripts -->
+  <script src="./ext/jquery/dist/jquery.min.js" charset="utf-8"></script>
+  <script src="./ext/bootstrap/3.3.7/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="./ext/bootstrap-material-design/0.5.10/dist/js/material.min.js" charset="utf-8"></script>
+  <script src="./ext/bootstrap-material-design/0.5.10/dist/js/ripples.js" charset="utf-8"></script>
+  <script src="./ext/toastr/build/toastr.min.js" charset="utf-8"></script>
+  <script src="./js/constant.js" charset="utf-8"></script>
+  <script>
+    $.material.init();
+    $.material.ripples();
+    $.material.input();
+    $.material.checkbox();
+    $.material.radio();
+    $(document).bind("contextmenu", function(e) {
+      return false;
+    });
+    $('[data-toggle="popover"]').popover({
+      delay: {
+        "show": 500,
+        "hide": 100
+      }
+    }).on("show.bs.popover", function() {
+      return $("#sidebar > ul > li > a > font").is(":hidden");
+    });
+    toastr.options = {
+      "progressBar": true
+    };
+
+    var checkboxReseter = false;
+
+    var updateButtons = function() {
+      var checkedCount = 0;
+      $(".table tr").each(function() {
+        $(this).children('td:eq(0)').each(function() {
+          var checkbox = $(this).find('label.checkbox');
+          if (checkbox.attr("on") == "true") {
+            checkedCount++;
+          }
+        })
+      });
+      if (checkedCount == 1) {
+        $("#btn-rename").show();
+        $("#btn-merge").hide();
+        var status = parseInt($("label.checkbox[on=true]").parent().parent().children(".taskname").attr("status"));
+        if (status == 0) {
+          $("#btn-delete").show();
+          $("#btn-launch").show();
+          $("#btn-start").hide();
+          $("#btn-abort").hide();
+        } else {
+          $("#btn-delete").hide();
+          $("#btn-unbind").show();
+          switch (status) {
+            case 1:
+              $("#btn-start").show();
+              $("#btn-abort").hide();
+              break;
+            case 2:
+              $("#btn-abort").show();
+              // $("#btn-start").hide();
+              break;
+          }
+        }
+      } else {
+        if (checkedCount > 1) {
+          $("#btn-delete").show();
+          $("#btn-merge").show();
+        } else {
+          $("#btn-delete").hide();
+          $("#btn-merge").hide();
+        }
+        $("#btn-launch").hide();
+        $("#btn-unbind").hide();
+        $("#btn-rename").hide();
+        $("#btn-start").hide();
+        $("#btn-abort").hide();
+      }
+    }
+
+    function listenTicks() {
+      $(".table tr").each(function() {
+        $(this).children('th:eq(0)').unbind().mouseup(function() {
+          checkboxReseter = $(this).find('input[type="checkbox"]').is(":checked");
+          $(".table tr").each(function() {
+            $(this).children('td:eq(0)').each(function() {
+              var checkbox = $(this).find('label.checkbox');
+              var on = checkbox.attr("on") == "true";
+              if (on == checkboxReseter) {
+                checkbox.click();
+                checkbox.attr("on", !on);
+              }
+              updateButtons();
+            })
+          });
+        });
+        $(this).children('td:eq(0)').children("label.checkbox").unbind().mouseup(function() {
+          $(this).attr("on", $(this).attr("on") == "true" ? false : true);
+          updateButtons();
+        });
+      });
+    }
+
+    $("#btn-rename").click(function() {
+      $(".table tr").each(function() {
+        if ($(this).children('td:eq(0)').find('label.checkbox').attr("on") == "true") {
+          $("#text-rename").val($(this).children("td:eq(1)").text());
+          $("#text-rename").attr("group-id", $(this).children("td:eq(1)").attr("group-id"));
+          return;
+        }
+      });
+    });
+
+    $("#btn-delete").click(function() {
+      var targetIds = [];
+      var targetStr = "<pre>";
+      $(".table tr").each(function() {
+        if ($(this).children('td:eq(0)').find('label.checkbox').attr("on") == "true") {
+          var taskTd = $(this).children("td:eq(1)");
+          targetStr += taskTd.text() + "<br>";
+          targetIds.push(taskTd.attr("group-id"));
+        }
+      });
+      targetStr += "</pre>";
+      $("#delete-dialog").attr("target", targetIds);
+      $("#delete-dialog div.modal-body").html("<span>This action <strong>CANNOT</strong> be undone, are you sure to delete the follow:</span>" + targetStr);
+    });
+
+    $("#btn-deletegroup").click(function() {
+      var targetIds = $("#delete-dialog").attr("target").split(",");
+      var success = true;
+      for (var i in targetIds) {
+        var groupId = targetIds[i];
+        try {
+          $.ajax({
+            url: API_TASKGROUP_BASE + groupId,
+            type: "delete",
+            dataType: "json",
+            async: false,
+            success: function(result) {
+              if (result.status == "success") {
+                $(".taskname[group-id=" + groupId + "]").parent("tr").remove();
+              } else {
+                toastr["error"](result.data);
+                return false;
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+              return false;
+            }
+          });
+        } catch (e) {
+          toastr["error"](e);
+          var success = false;
+          return false;
+        }
+      }
+      if (success) {
+        toastr["success"](targetIds.length + " TaskGroup(s) removed");
+      }
+      updateButtons();
+    });
+
+    $(document).on("click", ".taskname", function() {
+      var groupId = $(this).attr("group-id");
+      if (groupId == undefined || isNaN(groupId)) {
+        toastr["warning"]("Invalid group-id: " + groupId);
+        return false;
+      }
+      var urlListHtml = "<pre>";
+      $.ajax({
+        url: API_TASKGROUP_BASE + groupId,
+        type: "get",
+        dataType: "json",
+        async: false,
+        success: function(result) {
+          if (result.status == "success") {
+            for (var i in result.data) {
+              urlListHtml += result.data[i].url + "<br/>";
+            }
+          } else {
+            toastr["error"](result.data);
+            return false;
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+          return false;
+        }
+      });
+      urlListHtml += "</pre>";
+      $("#task-dialog div.modal-header .modal-title").text($(this).text());
+      $("#task-dialog div.modal-body").html(urlListHtml);
+      $("#task-dialog div.modal-body pre").css("max-height", $(window).height() - 210 + "px");
+      $("#task-dialog").modal();
+    });
+
+    $("#btn-launch").click(function() {
+      var spidersHtml = "";
+      $.ajax({
+        url: API_SPIDER_BASE,
+        type: "get",
+        dataType: "json",
+        async: false,
+        success: function(result) {
+          if (result.status == "success") {
+            for (var i = 0; i < result.data.length; i++) {
+              var spider = result.data[i];
+              spidersHtml += "<button class='btn launch' component-id='" + spider.id + "'><span class='title'>" + spider.name + "</span></button>";
+            };
+          } else {
+            toastr["error"](result.data);
+            return false;
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+          return false;
+        }
+      });
+      if (spidersHtml == "") {
+        toastr["warning"]("You have no spiders, build them in the workshop now!");
+      } else {
+        $("#launch-dialog .modal-body").html(spidersHtml);
+        $("#launch-dialog").modal();
+      }
+    });
+
+    $("#btn-unbind").click(function() {
+      var groupId;
+      $(".table tr").each(function() {
+        if ($(this).children('td:eq(0)').find('label.checkbox').attr("on") == "true") {
+          groupId = $(this).children("td:eq(1)").attr("group-id");
+          return;
+        }
+      });
+      if (groupId == undefined) {
+        toastr["error"]("No selection found.");
+      } else {
+        $.ajax({
+          url: API_TASKGROUP_UNBIND_BASE + groupId,
+          type: "delete",
+          dataType: "json",
+          async: false,
+          success: function(result) {
+            if (result.status == "success") {
+              toastr["success"]("TaskGroup unbind successful.");
+              updateTaskGroups();
+            } else {
+              toastr["error"](result.data);
+              return false;
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+            return false;
+          }
+        });
+      }
+    });
+
+    function updateTaskGroups() {
+      $("tr:not(:has(th))").remove();
+      listTaskGroups();
+      updateButtons();
+    }
+
+    $(document).on("click", "button.launch", function() {
+      var spiderId = $(this).attr("component-id");
+      var groupId;
+      $(".table tr").each(function() {
+        if ($(this).children('td:eq(0)').find('label.checkbox').attr("on") == "true") {
+          groupId = $(this).children("td:eq(1)").attr("group-id");
+          return;
+        }
+      });
+      if (spiderId == undefined || groupId == undefined) {
+        toastr["error"]("No selection found.");
+      } else {
+        $.ajax({
+          url: API_TASKGROUP_LAUNCH_BASE + groupId + "/" + spiderId,
+          type: "post",
+          dataType: "json",
+          async: false,
+          success: function(result) {
+            if (result.status == "success") {
+              $("#launch-dialog").modal("hide");
+              toastr["success"]("Ready for start!");
+              updateTaskGroups();
+            } else {
+              toastr["error"](result.data);
+              return false;
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+            return false;
+          }
+        });
+      }
+    });
+
+    $("#btn-addgroup").click(function() {
+      var name = $("#text-name").val();
+      var urlpattern = $("#text-urlpattern").val();
+      if (name.trim() == "" || urlpattern.trim() == "") {
+        toastr["warning"]("Please complete this form");
+        return false;
+      } else {
+        var form = {};
+        form.urlPattern = urlpattern;
+        $.ajax({
+          url: API_TASKGROUP_BASE + name,
+          type: "post",
+          dataType: "json",
+          contentType: "application/json;charset=UTF-8",
+          data: JSON.stringify(form),
+          async: false,
+          success: function(result) {
+            var createTime = new Date();
+            createTime.setTime(result.data.createTime);
+            var lastModifyTime = new Date();
+            lastModifyTime.setTime(result.data.lastModifyTime);
+            if (result.status == "success") {
+              var taskGroupHtml =
+                '<tr><td><label class="form-group checkbox" on="false"><input type="checkbox"><span class="checkbox-material"><span class="check"></span></span><label></td>\
+                <td class="taskname" group-id="' + result.data.id +
+                '" status="' + result.data.status + '" data-toggle="modal" data-target="#task-dialog">' +
+                result.data.name + '</td>\
+                <td>' + result.data.taskCount + '</td>\
+                <td>' + createTime.toLocaleString() + '</td>\
+                <td>' + lastModifyTime.toLocaleString() +
+                '</td>\
+                <td align="center"><span class="label label-default">IDLE</span></td>\
+              </tr>';
+              $("#table-tasks").append(taskGroupHtml);
+              $('#text-name').val('');
+              $('#text-urlpattern').val('');
+              listenTicks();
+            } else {
+              toastr["error"](result.data);
+              return false;
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+            return false;
+          }
+        });
+      }
+    });
+
+    $("#btn-renamegroup").click(function() {
+      var groupId = $('#text-rename').attr("group-id");
+      var name = $('#text-rename').val();
+      if (name.trim() == "") {
+        toastr["error"]("Please specify the task group name");
+        return false;
+      }
+      $.ajax({
+        url: API_TASKGROUP_BASE + groupId,
+        type: "put",
+        data: {
+          name: name
+        },
+        dataType: "json",
+        async: false,
+        success: function(result) {
+          if (result.status == "success") {
+            $(".taskname[group-id=" + groupId + "]").text(name);
+          } else {
+            toastr["error"](result.data);
+            return false;
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+          return false;
+        }
+      });
+    });
+
+    $("#btn-merge").click(function() {
+      var mergeIds = [];
+      var mergeNames = [];
+      $(".table tr").each(function() {
+        var taskTd = $(this).children("td:eq(1)");
+        if ($(this).children('td:eq(0)').find('label.checkbox').attr("on") == "true") {
+          mergeIds.push(parseInt(taskTd.attr("group-id")));
+          mergeNames.push(taskTd.text());
+        }
+      });
+      var form = {
+        name: mergeNames.join(" & "),
+        mergeIds: mergeIds
+      }
+      $.ajax({
+        url: API_TASKGROUP_MERGE,
+        type: "post",
+        dataType: "json",
+        contentType: "application/json;charset=UTF-8",
+        data: JSON.stringify(form),
+        async: false,
+        success: function(result) {
+          var createTime = new Date();
+          createTime.setTime(result.data.createTime);
+          var lastModifyTime = new Date();
+          lastModifyTime.setTime(result.data.lastModifyTime);
+          if (result.status == "success") {
+            var taskGroupHtml =
+              '<tr><td><label class="form-group checkbox" on="false"><input type="checkbox"><span class="checkbox-material"><span class="check"></span></span><label></td>\
+              <td class="taskname" group-id="' + result.data.id +
+              '" status="' + result.data.status + '" data-toggle="modal" data-target="#task-dialog">' +
+              result.data.name + '</td>\
+              <td>' + result.data.taskCount + '</td>\
+              <td>' + createTime.toLocaleString() + '</td>\
+              <td>' + lastModifyTime.toLocaleString() +
+              '</td>\
+              <td align="center"><span class="label label-default">IDLE</span></td>\
+            </tr>';
+            $("#table-tasks").append(taskGroupHtml);
+            $('#text-name').val('');
+            $('#text-urlpattern').val('');
+            listenTicks();
+          } else {
+            toastr["error"](result.data);
+            return false;
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+          return false;
+        }
+      });
+    });
+
+    function listTaskGroups() {
+      $.ajax({
+        url: API_TASKGROUP_BASE,
+        type: "get",
+        dataType: "json",
+        async: false,
+        success: function(result) {
+          if (result.status == "success") {
+            for (var i in result.data) {
+              var taskGroup = result.data[i];
+              var createTime = new Date();
+              createTime.setTime(taskGroup.createTime);
+              var lastModifyTime = new Date();
+              lastModifyTime.setTime(taskGroup.lastModifyTime);
+              var statusBarHtml;
+              switch (taskGroup.status) {
+                case 0:
+                  statusBarHtml = '<span class="label label-default">IDLE</span>';
+                  break;
+                case 1:
+                  statusBarHtml = '<span class="label label-default stopped">STOPPED</span>';
+                  break;
+                case 2:
+                  statusBarHtml = '<span class="label label-success running">RUNNING</span>';
+                  break;
+                case 3:
+                  statusBarHtml = '<span class="label label-error failure">FAILURE</span>';
+                  break;
+                default:
+                  statusBarHtml = '<span class="label">UNKNOWN</span>';
+              }
+              var taskGroupHtml =
+                '<tr><td><label class="form-group checkbox" on="false"><input type="checkbox"><span class="checkbox-material"><span class="check"></span></span><label></td>\
+                <td class="taskname" group-id="' + taskGroup.id +
+                '" status="' + taskGroup.status + '" data-toggle="modal" data-target="#task-dialog">' +
+                taskGroup.name + '</td>\
+                <td>' + taskGroup.taskCount + '</td>\
+                <td>' + createTime.toLocaleString() + '</td>\
+                <td>' + lastModifyTime.toLocaleString() +
+                '</td>\
+                <td align="center">' + statusBarHtml + '</td>\
+              </tr>';
+              $("#table-tasks").append(taskGroupHtml);
+              $('#text-name').val('');
+              $('#text-urlpattern').val('');
+            }
+            listenTicks();
+          } else {
+            toastr["error"](result.data);
+            return false;
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+          return false;
+        }
+      });
+    }
+
+    $("#btn-refresh").click(function() {
+      updateTaskGroups();
+    });
+
+    $("#btn-start").click(function() {
+      var groupId;
+      $(".table tr").each(function() {
+        if ($(this).children('td:eq(0)').find('label.checkbox').attr("on") == "true") {
+          groupId = $(this).children("td:eq(1)").attr("group-id");
+          return;
+        }
+      });
+      if (groupId == undefined) {
+        toastr["error"]("No selection found.");
+      } else {
+        $.ajax({
+          url: API_TASKGROUP_START_BASE + groupId,
+          type: "put",
+          dataType: "json",
+          async: false,
+          success: function(result) {
+            if (result.status == "success") {
+              updateTaskGroups();
+              //TODO Start
+              var count = parseInt($(".badge").html());
+              if (!isNaN(count)) {
+                $(".badge").html(count + 1);
+              }
+              $("#link-dashboard").attr("href", "./dashboard.html#" + groupId);
+              // TODO End
+            } else {
+              toastr["error"](result.data);
+              return false;
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+            return false;
+          }
+        });
+      }
+    });
+
+    $("#btn-abort").click(function() {
+      var groupId;
+      $(".table tr").each(function() {
+        if ($(this).children('td:eq(0)').find('label.checkbox').attr("on") == "true") {
+          groupId = $(this).children("td:eq(1)").attr("group-id");
+          return;
+        }
+      });
+      if (groupId == undefined) {
+        toastr["error"]("No selection found.");
+      } else {
+        $.ajax({
+          url: API_TASKGROUP_ABORT_BASE + groupId,
+          type: "put",
+          dataType: "json",
+          async: false,
+          success: function(result) {
+            if (result.status == "success") {
+              updateTaskGroups();
+            } else {
+              toastr["error"](result.data);
+              return false;
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            toastr["error"](XMLHttpRequest + " " + textStatus + " " + errorThrown);
+            return false;
+          }
+        });
+      }
+    })
+
+    listTaskGroups();
+    updateButtons();
+    listenTicks();
+  </script>
+</body>
+
+</html>

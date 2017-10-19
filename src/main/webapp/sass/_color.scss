@@ -1,0 +1,67 @@
+@charset "utf-8";
+
+@function color-contrast($bgcolor) {
+  @return if(lightness($bgcolor) < 50, $color-white, $color-text-medium);
+}
+
+/* Dark Theme */
+$color-background: #272b33;
+$color-background-select: rgba(255, 205, 16, .99);
+$color-background-bright: #30353f;
+$color-background-dark: #20242a;
+$color-background-medium: #272b33;
+$color-background-light: #30353f;
+$color-text-bright: #ffcd10;
+$color-text-select: #000000;
+$color-text-dark: #5b6270;
+$color-text-medium: #9ba3b4;
+$color-text-light: #c8d5ef;
+$color-border-dark: #23262d;
+$color-border-medium: #3d444e;
+$color-border-light: #4d535c;
+$color-light-blue: #6a9fb5;
+$color-blue: #6292f0;
+$color-dark-blue: #3371f1;
+$color-purple: #bd76ae;
+$color-yellow: #e3c18a;
+$color-orange: #e2914f;
+$color-pink: #c97071;
+$color-red: #ef633a;
+$color-green: #8dac4b;
+$color-dark-green: #78ab3d;
+$color-white: #d4d7d6;
+$color-black: #272b33;
+$color-brown: #8d5435;
+$color-cyan: #75b5aa;
+$color-grey: rgba(#3f4654, 0.78);
+
+/* Light Theme *//*
+$color-background: #c9c9c9;
+$color-background-select: #212121;
+$color-background-bright: #fafafa;
+$color-background-dark: #e0e0e0;
+$color-background-medium: #f5f5f5;
+$color-background-light: #fafafa;
+$color-text-bright: #009688;
+$color-text-select: #ffffff;
+$color-text-dark: #212121;
+$color-text-medium: #303030;
+$color-text-light: #424242;
+$color-border-dark: #cccccc;
+$color-border-medium: #e0e0e0;
+$color-border-light: #f1eded;
+$color-light-blue: #2196f3;
+$color-blue: #2979ff;
+$color-dark-blue: #1565c0;
+$color-purple: #bb6dab;
+$color-yellow: #fdd835;
+$color-orange: #fb8c00;
+$color-pink: #ec407a;
+$color-red: #e53935;
+$color-green: #aeea00;
+$color-dark-green: #009688;
+$color-white: #ffffff;
+$color-black: #2a3131;
+$color-brown: #6d4c41;
+$color-cyan: #00bcd4;
+$color-grey: rgba(#3f4654, 0.78);*/
